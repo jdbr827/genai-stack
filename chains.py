@@ -3,6 +3,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_ollama import OllamaEmbeddings
 from langchain_aws import BedrockEmbeddings
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_groq import ChatGroq
 
 from langchain_openai import ChatOpenAI
 from langchain_ollama import ChatOllama
@@ -63,12 +64,19 @@ def load_embedding_model(embedding_model_name: str, logger=BaseLogger(), config=
 
 
 def load_llm(llm_name: str, logger=BaseLogger(), config={}):
+    logger.info(llm_name + "IS THE NAME OF THE LLM")
     if llm_name in ["gpt-4", "gpt-4o", "gpt-4-turbo"]:
         logger.info("LLM: Using GPT-4")
         return ChatOpenAI(temperature=0, model_name=llm_name, streaming=True)
     elif llm_name == "gpt-3.5":
         logger.info("LLM: Using GPT-3.5")
         return ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo", streaming=True)
+    elif llm_name == "groq":
+        logger.info("LLM: Using Groq llama3.2-1b-preview, hi mom!")
+        return ChatGroq(
+            model_name = "llama-3.2-1b-preview",
+            streaming=True
+        )
     elif llm_name == "claudev2":
         logger.info("LLM: ClaudeV2")
         return ChatBedrock(

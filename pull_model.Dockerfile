@@ -17,7 +17,7 @@ COPY <<EOF pull_model.clj
     (println (format "pulling ollama model %s using %s" llm url))
     (if (and llm 
          url 
-         (not (#{"gpt-4" "gpt-3.5" "claudev2" "gpt-4o" "gpt-4-turbo"} llm))
+         (not (#{"gpt-4" "gpt-3.5" "claudev2" "groq" "gpt-4o" "gpt-4-turbo"} llm))
          (not (some #(.startsWith llm %) ["ai21.jamba-instruct-v1:0"
                                           "amazon.titan"
                                           "anthropic.claude"
