@@ -187,7 +187,7 @@ def configure_qa_rag_chain(llm, embeddings, embeddings_store_url, username, pass
                 ' Score: ' + answer.score+ '): '+  answer.body + '\n') as answerTexts
     } 
     RETURN '##Question: ' + question.title + '\n' + question.body + '\n' 
-        + answerTexts AS text, similarity as score, {source: question.link} AS metadata
+        + answerTexts AS text, similarity as score, {source: question.link, score: similarity} AS metadata
     ORDER BY similarity ASC // so that best answers are the last
     """,
     )
