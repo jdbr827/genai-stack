@@ -1,5 +1,7 @@
 import streamlit as st
+from PIL import Image
 from loader import load_so_data, load_high_score_so_data
+
 
 # Streamlit
 def get_tag() -> str:
@@ -50,5 +52,6 @@ def render_page():
                 except Exception as e:
                     st.error(f"Error: {e}", icon="🚨")
 
+if __name__ == "__main__":
+    render_page()
 
-render_page()

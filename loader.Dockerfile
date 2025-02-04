@@ -13,6 +13,7 @@ COPY requirements.txt .
 RUN pip install --upgrade -r requirements.txt
 
 COPY loader.py .
+COPY loaderUI.py .
 COPY utils.py .
 COPY chains.py .
 COPY images ./images
@@ -21,4 +22,4 @@ EXPOSE 8502
 
 HEALTHCHECK CMD curl --fail http://localhost:8502/_stcore/health
 
-ENTRYPOINT ["streamlit", "run", "loader.py", "--server.port=8502", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "loaderUI.py", "--server.port=8502", "--server.address=0.0.0.0"]

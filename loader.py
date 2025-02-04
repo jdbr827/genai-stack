@@ -7,7 +7,6 @@ from streamlit.logger import get_logger
 from chains import load_embedding_model
 from utils import create_constraints, create_vector_index
 from PIL import Image
-
 load_dotenv(".env")
 
 url = os.getenv("NEO4J_URI")
@@ -95,3 +94,4 @@ def insert_so_data(data: dict) -> None:
     MERGE (owner)-[:ASKED]->(question)
     """
     neo4j_graph.query(import_query, {"data": data["items"]})
+
