@@ -12,6 +12,7 @@ COPY requirements.txt .
 
 RUN pip install --upgrade -r requirements.txt
 
+COPY call_parser.py .
 COPY call_loader.py .
 COPY loader.py .
 COPY loaderUI.py .
