@@ -12,6 +12,7 @@ COPY requirements.txt .
 
 RUN pip install --upgrade -r requirements.txt
 
+COPY call_loader.py .
 COPY loader.py .
 COPY loaderUI.py .
 COPY utils.py .
@@ -22,4 +23,5 @@ EXPOSE 8502
 
 HEALTHCHECK CMD curl --fail http://localhost:8502/_stcore/health
 
-ENTRYPOINT ["streamlit", "run", "loaderUI.py", "--server.port=8502", "--server.address=0.0.0.0"]
+ENV FLASK_APP=call_loader.py
+CMD ["flask", "run", "--host=0.0.0.0", "--port=8502"]
