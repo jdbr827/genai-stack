@@ -54,6 +54,12 @@ def load_embedding_model(embedding_model_name: str, logger=BaseLogger(), config=
         )
         dimension = 768
         logger.info("Embedding: Using Google Generative AI Embeddings")
+    elif embedding_model_name == "modernBERT":
+        embeddings = HuggingFaceEmbeddings(
+            model_name="answerdotai/ModernBERT-base", cache_folder="/embedding_model"
+        )
+        dimension = 384
+        logger.info("Embedding: Using modernBERT")
     else:
         embeddings = HuggingFaceEmbeddings(
             model_name="all-MiniLM-L6-v2", cache_folder="/embedding_model"
