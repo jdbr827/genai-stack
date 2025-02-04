@@ -8,8 +8,14 @@ def create_app():
     def upload_file():
         if request.is_json:
             data = request.get_json()
-            return jsonify({"message": "JSON received", "data": data}), 200
+            return jsonify({"message": "JSON received"}), 200
         else:
             return jsonify({"message": "Request is not JSON"}), 400
     
+
+    @app.route('/health', methods=['GET'])
+    def health_check():
+        return jsonify({"status": "healthy"}), 200
+    
+
     return app

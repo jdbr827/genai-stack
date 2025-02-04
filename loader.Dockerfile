@@ -21,7 +21,7 @@ COPY images ./images
 
 EXPOSE 8502
 
-HEALTHCHECK CMD curl --fail http://localhost:8502/_stcore/health
+HEALTHCHECK CMD curl --fail http://localhost:8502/health
 
 ENV FLASK_APP=call_loader.py
 CMD ["flask", "run", "--host=0.0.0.0", "--port=8502"]
