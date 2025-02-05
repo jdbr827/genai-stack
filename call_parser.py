@@ -22,15 +22,22 @@ def parse_calls(data, logger):
         parse_phone_call(phone_call, logger)
 
 def parse_phone_call(phone_call, logger):
-    logger.info("PARSING PHONE CALL")
-    logger.info(phone_call)
+    #logger.info("PARSING PHONE CALL")
+    #logger.info(phone_call)
     
     my_number = phone_call.get('my_number')
+    other_number = phone_call.get('other_party_number')
+    call_id = phone_call.get('uuid')
     if my_number:
         import_query = f"""
-        MERGE (n:PhoneNumber {{number: '{my_number}'}})
+        MERGE (me:PhoneNumber {{number: '{my_number}'}})
+        MERGE (them:PhoneNumber {{number: '{other_number}'}})
+        MERGE (callNum:uuid {{number: '{call_id}'}})
+        MERGE (me)-[:SPOKE_TO]-(them)
+        MERGE (me)-[:MADE_CALL]-(callNum)
+        MERGE (them)-[:MADE_CALL]-(callNum)
         """
-        logger.info("Executing Cypher query: " + import_query)
+        #logger.info("Executing Cypher query: " + import_query)
         # Execute the query using your Neo4j driver here
     neo4j_graph.query(import_query, {"data":phone_call})
 

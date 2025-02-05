@@ -6,8 +6,8 @@ import logging
 def create_app():
     app = Flask(__name__)
     app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024
-    logging.basicConfig(level=logging.DEBUG)
-    app.logger.setLevel(logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
+    app.logger.setLevel(logging.INFO)
 
     @app.route('/upload', methods=['GET'])
     def upload_file():
@@ -18,7 +18,7 @@ def create_app():
             # Assuming the JSON is a dictionary with one key, whose value is a list of objets
             key = next(iter(data))
             value_list = data[key]
-            app.logger.info(value_list)
+            #app.logger.info(value_list)
             parse_calls(value_list, app.logger)
             return jsonify({"message": "JSON received"}), 200
         else:
